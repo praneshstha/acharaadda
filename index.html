@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACHAR ADDA — Traditionally Homemade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF6EE;
+    --warm: #F5EDD8;
+    --rust: #C0430F;
+    --rust-dark: #8C2F08;
+    --rust-light: #E8633A;
+    --ochre: #D4840A;
+    --green: #3B6B2A;
+    --green-light: #5A9044;
+    --text: #1E1208;
+    --text-mid: #5A3D22;
+    --text-light: #9A7B58;
+    --border: rgba(160,100,40,0.18);
+    --shadow: 0 4px 32px rgba(100,40,0,0.10);
+  }
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250,246,238,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--rust); letter-spacing: -0.01em; text-decoration: none; }
+  .nav-logo span { color: var(--text); font-style: italic; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text-mid); font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--rust); }
+  .nav-actions { display: flex; align-items: center; gap: 1rem; }
+  .cart-btn {
+    background: var(--rust); color: white; border: none; border-radius: 100px;
+    padding: 0.5rem 1.25rem; font-family: 'DM Sans', sans-serif; font-size: 0.875rem; font-weight: 500;
+    cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: background 0.2s;
+  }
+  .cart-btn:hover { background: var(--rust-dark); }
+  .cart-badge {
+    background: white; color: var(--rust); border-radius: 100px;
+    font-size: 0.75rem; font-weight: 700; padding: 0 0.4rem; min-width: 18px; text-align: center;
+  }
+
+  /* HERO */
+  .hero {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 90vh; align-items: center;
+    background: linear-gradient(135deg, var(--cream) 60%, var(--warm) 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -80px; right: -80px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,67,15,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { padding: 4rem 3rem 4rem 4rem; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(192,67,15,0.08); color: var(--rust-dark);
+    border: 1px solid rgba(192,67,15,0.2); border-radius: 100px;
+    font-size: 0.78rem; font-weight: 500; padding: 0.3rem 0.9rem;
+    margin-bottom: 1.5rem; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif; font-size: 3.8rem; font-weight: 700; line-height: 1.05;
+    color: var(--text); margin-bottom: 1.25rem; letter-spacing: -0.02em;
+  }
+  .hero h1 em { color: var(--rust); font-style: italic; }
+  .hero-desc { font-size: 1.05rem; color: var(--text-mid); line-height: 1.75; max-width: 420px; margin-bottom: 2rem; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--rust); color: white; border: none; border-radius: 100px;
+    padding: 0.85rem 2rem; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500;
+    cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--rust-dark); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--rust); border: 1.5px solid var(--rust); border-radius: 100px;
+    padding: 0.85rem 2rem; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500;
+    cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { background: rgba(192,67,15,0.06); }
+  .hero-img {
+    display: flex; align-items: center; justify-content: center;
+    padding: 3rem 3rem 3rem 2rem; position: relative;
+  }
+ .hero-img-frame {
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: var(--warm);
+  overflow: hidden;
+  border: 3px solid rgba(192,67,15,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+  @keyframes morph {
+    0%,100% { border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%; }
+    50% { border-radius: 45% 55% 40% 60% / 55% 45% 55% 45%; }
+  }
+  .hero-float {
+    position: absolute; background: white; border-radius: 16px;
+    padding: 0.75rem 1rem; box-shadow: 0 8px 32px rgba(100,40,0,0.12);
+    font-size: 0.82rem; font-weight: 500; color: var(--text);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .hero-float.f1 { bottom: 80px; left: 20px; }
+  .hero-float.f2 { top: 80px; right: 20px; }
+  .float-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); }
+  .float-dot.orange { background: var(--rust-light); }
+
+  
+  .trust-bar {
+    background: var(--rust); color: white;
+    display: flex; justify-content: center; align-items: center; gap: 3rem;
+    padding: 1rem 2rem; flex-wrap: wrap;
+  }
+  .trust-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 400; opacity: 0.92; }
+  .trust-icon { font-size: 1.1rem; }
+
+ 
+  section { padding: 5rem 4rem; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 500; color: var(--rust); letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 0.75rem; display: block;
+  }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; color: var(--text); margin-bottom: 1rem; line-height: 1.15; }
+  .section-sub { font-size: 1rem; color: var(--text-mid); line-height: 1.7; max-width: 520px; }
+
+  .products-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem; }
+  .filter-tabs { display: flex; gap: 0.5rem; }
+  .filter-tab {
+    background: transparent; border: 1px solid var(--border); border-radius: 100px;
+    padding: 0.45rem 1.1rem; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500;
+    cursor: pointer; color: var(--text-mid); transition: all 0.2s;
+  }
+  .filter-tab.active, .filter-tab:hover { background: var(--rust); color: white; border-color: var(--rust); }
+  .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+  .product-card {
+    background: white; border-radius: 20px; border: 1px solid var(--border);
+    overflow: hidden; transition: all 0.25s; cursor: pointer; position: relative;
+  }
+  .product-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(100,40,0,0.12); }
+  .product-img {
+    height: 200px; background: var(--warm); display: flex; align-items: center;
+    justify-content: center; font-size: 4.5rem; position: relative;
+  }
+  .product-badge {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--rust); color: white; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600; padding: 0.25rem 0.6rem; letter-spacing: 0.03em;
+  }
+  .product-badge.green { background: var(--green); }
+  .product-badge.ochre { background: var(--ochre); }
+  .product-wishlist {
+    position: absolute; top: 12px; right: 12px;
+    width: 34px; height: 34px; border-radius: 50%; background: white;
+    border: none; cursor: pointer; font-size: 1rem; display: flex;
+    align-items: center; justify-content: center; transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .product-wishlist:hover { transform: scale(1.1); }
+  .product-wishlist.active { color: #e03; }
+  .product-info { padding: 1.25rem; }
+  .product-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.35rem; }
+  .product-desc { font-size: 0.8rem; color: var(--text-light); line-height: 1.55; margin-bottom: 0.75rem; }
+  .product-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .product-price { font-size: 1.15rem; font-weight: 700; color: var(--rust); }
+  .product-weight { font-size: 0.78rem; color: var(--text-light); }
+  .product-rating { display: flex; align-items: center; gap: 0.3rem; font-size: 0.78rem; color: var(--text-mid); }
+  .stars { color: var(--ochre); }
+  .add-cart-btn {
+    width: 100%; background: var(--rust); color: white; border: none;
+    border-radius: 12px; padding: 0.75rem; font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.2s;
+  }
+  .add-cart-btn:hover { background: var(--rust-dark); }
+  .add-cart-btn:disabled { background: #ccc; cursor: not-allowed; }
+  .out-badge { position: absolute; inset: 0; background: rgba(250,246,238,0.7); display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--text-mid); font-size: 0.9rem; border-radius: 20px; }
+
+  
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-img-wrap {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .about-img-box {
+    background: var(--warm); border-radius: 16px; display: flex;
+    align-items: center; justify-content: center; font-size: 4rem;
+    border: 1px solid var(--border);
+  }
+  .about-img-box:first-child { grid-row: span 2; min-height: 280px; }
+  .about-img-box:not(:first-child) { min-height: 130px; }
+  .about-content {}
+  .about-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+  .about-stat { background: var(--warm); border-radius: 16px; padding: 1.25rem; border: 1px solid var(--border); }
+  .about-stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--rust); }
+  .about-stat-lbl { font-size: 0.8rem; color: var(--text-mid); margin-top: 0.25rem; }
+
+  
+  .how-section { background: var(--warm); }
+  .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .step-card { text-align: center; padding: 1.5rem 1rem; }
+  .step-num {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--rust); color: white; font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700; display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+  }
+  .step-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+  .step-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+  .step-desc { font-size: 0.83rem; color: var(--text-mid); line-height: 1.6; }
+
+  
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+  .review-card {
+    background: white; border-radius: 20px; padding: 1.5rem;
+    border: 1px solid var(--border);
+  }
+  .review-stars { color: var(--ochre); font-size: 1rem; margin-bottom: 0.75rem; }
+  .review-text { font-size: 0.88rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 1rem; font-style: italic; }
+  .review-author { display: flex; align-items: center; gap: 0.75rem; }
+  .review-avatar {
+    width: 36px; height: 36px; border-radius: 50%; background: var(--warm);
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+  }
+  .review-name { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+  .review-loc { font-size: 0.75rem; color: var(--text-light); }
+
+  
+  .contact-section { background: var(--text); color: white; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: start; }
+  .contact-section .section-label { color: var(--rust-light); }
+  .contact-section .section-title { color: white; }
+  .contact-section .section-sub { color: rgba(255,255,255,0.65); }
+  .contact-channels { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+  .channel-item {
+    display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem;
+    background: rgba(255,255,255,0.06); border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);
+    text-decoration: none; color: white; transition: all 0.2s; cursor: pointer;
+  }
+  .channel-item:hover { background: rgba(255,255,255,0.1); }
+  .channel-icon { font-size: 1.5rem; }
+  .channel-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+  .channel-val { font-size: 0.9rem; font-weight: 500; }
+  .contact-form { background: white; border-radius: 24px; padding: 2rem; }
+  .contact-form h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 1.5rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+  .form-group label { font-size: 0.8rem; font-weight: 500; color: var(--text-mid); }
+  .form-group input, .form-group select, .form-group textarea {
+    border: 1.5px solid var(--border); border-radius: 12px;
+    padding: 0.7rem 1rem; font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+    color: var(--text); background: var(--cream); outline: none; transition: border 0.2s;
+    resize: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--rust); }
+  .form-submit {
+    width: 100%; background: var(--rust); color: white; border: none;
+    border-radius: 100px; padding: 0.9rem; font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.2s;
+  }
+  .form-submit:hover { background: var(--rust-dark); }
+  .form-success { text-align: center; padding: 2rem; display: none; }
+  .form-success-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .form-success h4 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--text); margin-bottom: 0.5rem; }
+  .form-success p { font-size: 0.88rem; color: var(--text-mid); }
+
+  
+  .cart-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+    z-index: 200; backdrop-filter: blur(2px);
+  }
+  .cart-overlay.open { display: block; }
+  .cart-panel {
+    position: fixed; top: 0; right: 0; width: 420px; height: 100vh;
+    background: white; z-index: 201; box-shadow: -8px 0 40px rgba(100,40,0,0.12);
+    display: flex; flex-direction: column;
+    transform: translateX(100%); transition: transform 0.3s ease;
+  }
+  .cart-panel.open { transform: translateX(0); }
+  .cart-header {
+    padding: 1.5rem; border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .cart-header h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--text); }
+  .cart-close { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text-mid); }
+  .cart-items { flex: 1; overflow-y: auto; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+  .cart-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px; color: var(--text-light); gap: 0.75rem; font-size: 0.9rem; }
+  .cart-empty-icon { font-size: 3rem; }
+  .cart-item { display: flex; gap: 1rem; padding: 1rem; background: var(--cream); border-radius: 16px; align-items: center; }
+  .cart-item-icon { font-size: 2rem; min-width: 50px; text-align: center; }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { font-weight: 600; font-size: 0.9rem; color: var(--text); margin-bottom: 0.25rem; }
+  .cart-item-price { font-size: 0.85rem; color: var(--rust); font-weight: 600; }
+  .cart-item-qty { display: flex; align-items: center; gap: 0.5rem; }
+  .qty-btn { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border); background: white; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+  .qty-val { font-size: 0.88rem; font-weight: 600; min-width: 20px; text-align: center; }
+  .cart-remove { background: none; border: none; cursor: pointer; color: var(--text-light); font-size: 1rem; padding: 0.25rem; }
+  .cart-footer { padding: 1.5rem; border-top: 1px solid var(--border); }
+  .cart-totals { margin-bottom: 1rem; }
+  .cart-row { display: flex; justify-content: space-between; font-size: 0.875rem; color: var(--text-mid); margin-bottom: 0.5rem; }
+  .cart-row.total { font-weight: 700; font-size: 1rem; color: var(--text); border-top: 1px solid var(--border); padding-top: 0.75rem; margin-top: 0.5rem; }
+  .checkout-btn {
+    width: 100%; background: var(--rust); color: white; border: none;
+    border-radius: 100px; padding: 1rem; font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.2s;
+  }
+  .checkout-btn:hover { background: var(--rust-dark); }
+
+
+  footer {
+    background: #140C04; color: rgba(255,255,255,0.7);
+    padding: 3rem 4rem 2rem;
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: white; margin-bottom: 1rem; }
+  .footer-desc { font-size: 0.83rem; line-height: 1.7; margin-bottom: 1.25rem; }
+  .footer-social { display: flex; gap: 0.75rem; }
+  .social-btn { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
+  .social-btn:hover { background: rgba(192,67,15,0.5); }
+  .footer-col h4 { font-size: 0.82rem; font-weight: 600; color: white; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .footer-col ul a { font-size: 0.83rem; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--rust-light); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; }
+
+ 
+  .notify-popup {
+    position: fixed; bottom: 2rem; left: 2rem; z-index: 300;
+    background: white; border-radius: 16px; padding: 1rem 1.25rem;
+    box-shadow: 0 8px 32px rgba(100,40,0,0.18); border: 1px solid var(--border);
+    display: flex; align-items: center; gap: 0.75rem; max-width: 280px;
+    transform: translateY(200%); transition: transform 0.4s ease;
+    pointer-events: none;
+  }
+  .notify-popup.show { transform: translateY(0); }
+  .notify-icon { font-size: 1.5rem; }
+  .notify-text { font-size: 0.82rem; color: var(--text); }
+  .notify-text strong { display: block; color: var(--rust); font-weight: 600; margin-bottom: 0.1rem; }
+
+ @media (max-width: 900px) {
+
+  nav {
+    padding: 0 1rem;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    min-height: auto;
+    padding-top: 2rem;
+  }
+
+  .hero-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 2.3rem;
+    line-height: 1.2;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+    max-width: 100%;
+    margin: 0 auto 2rem;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-img {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-img-frame {
+    width: 280px;
+    height: 280px;
+  }
+
+  .hero-float {
+    font-size: 0.72rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .hero-float.f1 {
+    bottom: 10px;
+    left: 10px;
+  }
+
+  .hero-float.f2 {
+    top: 10px;
+    right: 10px;
+  }
+
+  .trust-bar {
+    gap: 1rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .products-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-grid,
+  .contact-grid,
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  section {
+    padding: 3rem 1.25rem;
+  }
+
+  .cart-panel {
+    width: 100%;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+
+<nav>
+  <a class="nav-logo" href="#">ACHAR <span>ADDA</span></a>
+  <ul class="nav-links">
+    <li><a href="#products">Shop</a></li>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="cart-btn" onclick="toggleCart()">
+      🛒 Cart <span class="cart-badge" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+
+<section class="hero" style="padding: 0;">
+  <div class="hero-content">
+    <span class="hero-tag">🌿 Traditionally Homemade</span>
+    <h1>Bold Flavours from <em>ACHARAADA's</em> Kitchen</h1>
+    <p class="hero-desc">Handcrafted Nepali pickles, chhop &amp; masalas made with love, local spices, and generations of tradition. No preservatives. No shortcuts.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">Shop Now</a>
+      <a href="#about" class="btn-outline">Our Story</a>
+    </div>
+  </div>
+ <div class="hero-img">
+  <div class="hero-img-frame">
+    <img src="kattu.jpeg" alt="Achar Jar" class="hero-image">
+  </div>
+
+  <div class="hero-float f1">
+    <span class="float-dot"></span> 100% Natural Ingredients
+  </div>
+
+  <div class="hero-float f2">
+    <span class="float-dot orange"></span> Ships across Nepal
+  </div>
+</div>
+</section>
+
+<div class="trust-bar">
+  <span class="trust-item"><span class="trust-icon">🌿</span> No Preservatives</span>
+  <span class="trust-item"><span class="trust-icon">🏡</span> Homemade with Love</span>
+  <span class="trust-item"><span class="trust-icon">📦</span> Secure Packaging</span>
+  <span class="trust-item"><span class="trust-icon">🚚</span> Fast Delivery</span>
+  <span class="trust-item"><span class="trust-icon">💯</span> Satisfaction Guaranteed</span>
+</div>
+
+<section id="products">
+  <div class="products-header">
+    <div>
+      <span class="section-label">Our Products</span>
+      <h2 class="section-title" style="margin-bottom:0; font-size:2rem;">Handcrafted Favourites</h2>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterProducts('all', this)">All</button>
+      <button class="filter-tab" onclick="filterProducts('achar', this)">Achar</button>
+      <button class="filter-tab" onclick="filterProducts('chhop', this)">Chhop</button>
+      <button class="filter-tab" onclick="filterProducts('masala', this)">Masala</button>
+    </div>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<section id="about" style="background: var(--warm);">
+  <div class="about-grid">
+    <div class="about-img-wrap">
+      <div class="about-img-box" style="font-size:5rem;">👩‍🍳</div>
+      <div class="about-img-box" style="font-size:2.5rem;">🌶️</div>
+      <div class="about-img-box" style="font-size:2.5rem;">🌿</div>
+    </div>
+    <div class="about-content">
+      <span class="section-label">Our Story</span>
+      <h2 class="section-title">Made like Aama used to make it</h2>
+      <p style="font-size:1rem; color:var(--text-mid); line-height:1.8; margin-bottom:1rem;">
+        Achar Adda was born from a simple desire — to share the authentic taste of Nepali home cooking with everyone. Every jar is prepared the same way it has been for generations: fresh ingredients, traditional spices, and a whole lot of patience.
+      </p>
+      <p style="font-size:1rem; color:var(--text-mid); line-height:1.8;">
+        We source our spices locally, grind them by hand when possible, and never use artificial preservatives. When you open a jar, you open a little piece of Nepal.
+      </p>
+      <div class="about-stat-row">
+        <div class="about-stat"><div class="about-stat-num">12+</div><div class="about-stat-lbl">Unique Products</div></div>
+        <div class="about-stat"><div class="about-stat-num">500+</div><div class="about-stat-lbl">Happy Customers</div></div>
+        <div class="about-stat"><div class="about-stat-num">100%</div><div class="about-stat-lbl">Natural Ingredients</div></div>
+        <div class="about-stat"><div class="about-stat-num">3 Gen</div><div class="about-stat-lbl">Family Recipes</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="how-section">
+  <div style="text-align:center; max-width:560px; margin:0 auto;">
+    <span class="section-label">How It Works</span>
+    <h2 class="section-title">From our kitchen to your table</h2>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-icon">🛒</div>
+      <div class="step-title">Browse &amp; Order</div>
+      <p class="step-desc">Pick your favourites from our growing range of achars, chhops, and masalas. Add to cart and place your order in minutes.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-icon">👩‍🍳</div>
+      <div class="step-title">Made Fresh</div>
+      <p class="step-desc">Each batch is prepared fresh after orders come in. Traditional methods, no shortcuts, no preservatives.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-icon">📦</div>
+      <div class="step-title">Carefully Packed</div>
+      <p class="step-desc">Sealed in airtight jars, wrapped with care to keep flavours locked in and your order safe during transit.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-icon">🚚</div>
+      <div class="step-title">Delivered to You</div>
+      <p class="step-desc">We deliver across Nepal. Expect your order within 3–5 business days, fresh and ready to savour.</p>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <span class="section-label">Customer Love</span>
+  <h2 class="section-title">What our customers say</h2>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Babal!"</p>
+      <div class="review-author"><div class="review-avatar">👩</div><div><div class="review-name">Sumit Rajbanshi</div><div class="review-loc">Birtamode</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Love it. The packaging was neat and delivery was quick!"</p>
+      <div class="review-author"><div class="review-avatar">👨</div><div><div class="review-name">Hrishika Shrestha</div><div class="review-loc">Dharan</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★☆</div>
+      <p class="review-text">"Dammi"</p>
+      <div class="review-author"><div class="review-avatar">👩</div><div><div class="review-name">Pranesh Shrestha</div><div class="review-loc">Chowk Tira</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <div class="contact-grid">
+    <div>
+      <span class="section-label">Get In Touch</span>
+      <h2 class="section-title">We'd love to hear from you</h2>
+      <p class="section-sub">Have a question about your order, want to place a bulk order, or just want to tell us how much you loved the achar? Reach out anytime.</p>
+      <div class="contact-channels">
+        <a class="channel-item" href="tel:+9779816926762">
+          <span class="channel-icon">📞</span>
+          <div><div class="channel-label">Phone / WhatsApp</div><div class="channel-val">+977 9816926762</div></div>
+        </a>
+        <a class="channel-item" href="mailto:acharadda762@gmail.com">
+          <span class="channel-icon">✉️</span>
+          <div><div class="channel-label">Email</div><div class="channel-val">acharadda@gmail.com</div></div>
+        </a>
+        <a class="channel-item" href="https://www.facebook.com/acharaada" target="_blank">
+          <span class="channel-icon">📘</span>
+          <div><div class="channel-label">Facebook</div><div class="channel-val">@acharadda</div></div>
+        </a>
+        <a class="channel-item" href="https://www.instagram.com/acharadda" target="_blank">
+          <span class="channel-icon">📸</span>
+          <div><div class="channel-label">Instagram</div><div class="channel-val">@acharadda</div></div>
+        </a>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div id="contactFormWrap">
+        <h3>Send us a message</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Your Name</label><input type="text" id="cName" placeholder="Your Name"></div>
+          <div class="form-group"><label>Phone / Email</label><input type="text" id="cContact" placeholder="Phone / Email"></div>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <select id="cSubject">
+            <option>Order Enquiry</option>
+            <option>Bulk / Wholesale Order</option>
+            <option>Delivery Query</option>
+            <option>Product Feedback</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea id="cMessage" rows="4" placeholder="Tell us anything…"></textarea></div>
+        <button class="form-submit" onclick="submitForm()">Send Message →</button>
+      </div>
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">🎉</div>
+        <h4>Message Received!</h4>
+        <p>We'll get back to you within 24 hours. Thank you for reaching out!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">Achar Adda</div>
+      <p class="footer-desc">Homemade Nepali pickles and sauces crafted with love, tradition, and bold flavours from fresh, local ingredients.</p>
+      <div class="footer-social">
+        <div class="social-btn">📘</div>
+        <div class="social-btn">📸</div>
+        <div class="social-btn">🐦</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#products">All Products</a></li>
+        <li><a href="#products">Achar</a></li>
+        <li><a href="#products">Chhop</a></li>
+        <li><a href="#products">Masala</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Policies</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Refund Policy</a></li>
+        <li><a href="#">Shipping Info</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Achar Adda. All Rights Reserved.</span>
+    <span>Made with ❤️ in Nepal</span>
+  </div>
+</footer>
+
+
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h2>Your Cart</h2>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-totals" id="cartTotals"></div>
+    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout →</button>
+  </div>
+</div>
+
+
+<div class="notify-popup" id="notifyPopup">
+  <span class="notify-icon" id="notifyIcon">🛒</span>
+  <div class="notify-text"><strong id="notifyTitle"></strong><span id="notifyMsg"></span></div>
+</div>
+
+
+<script>
+const PRODUCTS = [
+  { id:1, name:'Dry Fish & Timmur Chhop', desc:'Bold smoky dry fish with the numbing heat of timmur pepper — a true Nepali classic.', price:480, weight:'200gm', emoji:'🐟', category:'chhop', badge:'Bestseller', badgeType:'', inStock:true, rating:4.8, reviews:24 },
+  { id:2, name:'Tomato Achar', desc:'Tangy roasted tomatoes blended with mustard seeds and a kick of chilli. Perfect with dal-bhat.', price:320, weight:'250gm', emoji:'🍅', category:'achar', badge:'Popular', badgeType:'green', inStock:true, rating:4.9, reviews:41 },
+  { id:3, name:'Gundruk Achar', desc:'Fermented leafy greens in a sour, aromatic pickle — deeply traditional and utterly satisfying.', price:350, weight:'200gm', emoji:'🥬', category:'achar', badge:'Traditional', badgeType:'ochre', inStock:true, rating:4.7, reviews:18 },
+  { id:4, name:'Lapsi Achar', desc:'Sweet-sour Nepali hog plum pickle with a tangy chilli punch. Great as a snack or condiment.', price:280, weight:'200gm', emoji:'🫐', category:'achar', badge:'', badgeType:'', inStock:true, rating:4.6, reviews:12 },
+  { id:5, name:'Timmur Masala', desc:'Hand-ground Sichuan pepper blend — adds the signature numbing heat to any dish.', price:220, weight:'100gm', emoji:'🌶️', category:'masala', badge:'New', badgeType:'', inStock:true, rating:4.8, reviews:9 },
+  { id:6, name:'Bhuteko Masu Chhop', desc:'Smoky dried meat chhop with garlic and timmur. A flavour-packed side for any meal.', price:550, weight:'150gm', emoji:'🥩', category:'chhop', badge:'', badgeType:'', inStock:false, rating:4.9, reviews:6 },
+  { id:7, name:'Khursani Achar', desc:'A fiery chilli pickle for those who love intense heat. Made with fresh local chillies.', price:290, weight:'180gm', emoji:'🌶️', category:'achar', badge:'Spicy 🔥', badgeType:'', inStock:true, rating:4.5, reviews:21 },
+  { id:8, name:'Ginger Masala', desc:'Aromatic dried ginger blend — essential for chai, curries, and Nepali cooking.', price:180, weight:'80gm', emoji:'🫚', category:'masala', badge:'', badgeType:'', inStock:true, rating:4.4, reviews:7 },
+];
+
+let cart = {};
+let currentFilter = 'all';
+
+function renderProducts(filter = 'all') {
+  const grid = document.getElementById('productsGrid');
+  const filtered = filter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.category === filter);
+  grid.innerHTML = filtered.map(p => `
+    <div class="product-card" data-category="${p.category}">
+      <div class="product-img">
+        ${p.badge ? `<span class="product-badge ${p.badgeType}">${p.badge}</span>` : ''}
+        <button class="product-wishlist" onclick="toggleWish(this)" title="Wishlist">🤍</button>
+        <span style="font-size:4.5rem">${p.emoji}</span>
+        ${!p.inStock ? `<div class="out-badge">Out of Stock</div>` : ''}
+      </div>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-meta">
+          <div><div class="product-price">Rs ${p.price.toLocaleString()}</div><div class="product-weight">${p.weight}</div></div>
+          <div class="product-rating"><span class="stars">★</span> ${p.rating} (${p.reviews})</div>
+        </div>
+        <button class="add-cart-btn" ${!p.inStock ? 'disabled' : ''} onclick="addToCart(${p.id})">${p.inStock ? '+ Add to Cart' : 'Out of Stock'}</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterProducts(cat, el) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderProducts(cat);
+}
+
+function addToCart(id) {
+  const product = PRODUCTS.find(p => p.id === id);
+  if (!product || !product.inStock) return;
+  cart[id] = (cart[id] || 0) + 1;
+  updateCartUI();
+  showNotify('Added to cart!', product.name, '🛒');
+}
+
+function toggleWish(btn) {
+  btn.classList.toggle('active');
+  btn.textContent = btn.classList.contains('active') ? '❤️' : '🤍';
+}
+
+function updateCartUI() {
+  const total = Object.values(cart).reduce((a, b) => a + b, 0);
+  document.getElementById('cartCount').textContent = total;
+  renderCart();
+}
+
+function renderCart() {
+  const wrap = document.getElementById('cartItems');
+  const items = Object.entries(cart).filter(([,q]) => q > 0);
+  if (items.length === 0) {
+    wrap.innerHTML = `<div class="cart-empty"><div class="cart-empty-icon">🛒</div><span>Your cart is empty</span></div>`;
+    document.getElementById('cartTotals').innerHTML = '';
+    return;
+  }
+  wrap.innerHTML = items.map(([id, qty]) => {
+    const p = PRODUCTS.find(x => x.id == id);
+    return `<div class="cart-item">
+      <div class="cart-item-icon">${p.emoji}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${p.name}</div>
+        <div class="cart-item-price">Rs ${p.price.toLocaleString()} × ${qty} = Rs ${(p.price * qty).toLocaleString()}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.5rem;align-items:flex-end">
+        <div class="cart-item-qty">
+          <button class="qty-btn" onclick="changeQty(${id}, -1)">−</button>
+          <span class="qty-val">${qty}</span>
+          <button class="qty-btn" onclick="changeQty(${id}, 1)">+</button>
+        </div>
+        <button class="cart-remove" onclick="changeQty(${id}, -${qty})">🗑️</button>
+      </div>
+    </div>`;
+  }).join('');
+  const subtotal = items.reduce((s, [id, qty]) => s + PRODUCTS.find(x => x.id == id).price * qty, 0);
+  const shipping = subtotal > 1000 ? 0 : 120;
+  document.getElementById('cartTotals').innerHTML = `
+    <div class="cart-row"><span>Subtotal</span><span>Rs ${subtotal.toLocaleString()}</span></div>
+    <div class="cart-row"><span>Shipping</span><span>${shipping === 0 ? '<span style="color:var(--green)">Free</span>' : 'Rs '+shipping}</span></div>
+    <div class="cart-row total"><span>Total</span><span>Rs ${(subtotal+shipping).toLocaleString()}</span></div>
+  `;
+}
+
+function changeQty(id, delta) {
+  cart[id] = Math.max(0, (cart[id] || 0) + delta);
+  if (cart[id] === 0) delete cart[id];
+  updateCartUI();
+}
+
+function toggleCart() {
+  document.getElementById('cartOverlay').classList.toggle('open');
+  document.getElementById('cartPanel').classList.toggle('open');
+}
+
+function checkout() {
+
+  if (Object.keys(cart).length === 0) {
+    showNotify('Cart is empty', 'Add some products first', '⚠️');
+    return;
+  }
+
+  let orderMessage = "Hello, I want to place an order.%0A%0A";
+  orderMessage += "🛒 *Order Details:*%0A";
+
+  let subtotal = 0;
+
+  Object.entries(cart).forEach(([id, qty]) => {
+    const product = PRODUCTS.find(p => p.id == id);
+    const itemTotal = product.price * qty;
+    subtotal += itemTotal;
+
+    orderMessage += `• ${product.name} × ${qty} — Rs ${itemTotal}%0A`;
+  });
+
+  const shipping = subtotal > 1000 ? 0 : 100;
+  const total = subtotal + shipping;
+
+  orderMessage += `%0A*Subtotal:* Rs ${subtotal}`;
+  orderMessage += `%0A*Shipping:* ${shipping === 0 ? 'Free' : 'Rs ' + shipping}`;
+  orderMessage += `%0A*Total:* Rs ${total}`;
+
+  orderMessage += `%0A%0AName:`;
+  orderMessage += `%0APhone:`;
+  orderMessage += `%0ADelivery Address:`;
+
+  const whatsappNumber = "9779816926762";
+
+  const whatsappURL =
+    `https://wa.me/${whatsappNumber}?text=${orderMessage}`;
+
+  window.open(whatsappURL, "_blank");
+}
+
+function submitForm() {
+  const name = document.getElementById('cName').value.trim();
+  const contact = document.getElementById('cContact').value.trim();
+  const msg = document.getElementById('cMessage').value.trim();
+  if (!name || !contact || !msg) { showNotify('Missing fields', 'Please fill all fields', '⚠️'); return; }
+  document.getElementById('contactFormWrap').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+
+let notifyTimer;
+function showNotify(title, msg, icon) {
+  document.getElementById('notifyTitle').textContent = title;
+  document.getElementById('notifyMsg').textContent = msg;
+  document.getElementById('notifyIcon').textContent = icon;
+  const el = document.getElementById('notifyPopup');
+  el.classList.add('show');
+  clearTimeout(notifyTimer);
+  notifyTimer = setTimeout(() => el.classList.remove('show'), 2800);
+}
+
+renderProducts('all');
+</script>
+</body>
+</html>
